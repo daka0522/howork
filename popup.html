@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <link href="css_actions.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+    <style>
+      /* 1 .625 .39 .244  */
+      :root {
+        /* white */
+        --white: rgba(255, 255, 255, 1);
+        --white-light: rgba(255, 255, 255, .625);
+        --white-dark: rgba(255, 255, 255, .39);
+
+        /* gray */
+        --gray-light: rgba(159, 159, 159, .09);
+        --gray-dark: rgba(159, 159, 159, .16);
+
+        /* black */
+        --black-light:rgba(0, 0, 0, .39);
+        --black-dark:  rgba(0, 0, 0, .625);
+
+        /* green */
+        --green-light: rgba(0, 159, 0, .625);
+
+      }
+      body {
+        background-color: var(--gray-light);
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        /* background-color: gray; */
+        font-family: 'Philosopher', sans-serif;
+        font-size: 1rem;
+        line-height: 1.6rem;
+        display: grid;
+        /* place-items: center; */
+        /* place-content: center; */
+        width: 16.77em;
+        grid-gap: .625em;
+        padding: 1.6rem 0 1.6rem 0;
+        text-align: center;
+      }
+      #app * {
+        border-radius: .48em;
+      }
+      #app *:disabled {
+        background-color: red;;
+      }
+      #app ul, ol {
+        list-style: none;
+        padding: 0;
+      }
+
+
+      .btn {
+        color: var(--black-dark);
+        /* border-radius: .625em; */
+        background-color: var(--white-light);
+        box-shadow: 0 0 .625em .1em var(--gray-dark);
+        padding: .24em .15em .24em .15em;
+        border-style: none;
+        margin: .39em;
+
+        height: 2.56em;
+        width: 6.55em;
+
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .btn:active {
+        transform: scale(.9);
+        background-color: var(--green-light);
+        color: var(--white);
+      }
+
+
+      .board {
+        background-color: var(--white);
+        padding: .48em;
+        border-top: .16em solid var(--gray-light);
+        border-bottom: .16em solid var(--gray-light);
+        /* border-radius: .48em; */
+      }
+
+
+      p, h4 {
+        margin: .4rem 0 .4rem 0;
+      }
+      h4 {
+        color: var(--black-dark);
+        font-weight: 400;
+      }
+      #elapsedTime {
+        font-size: 1.6em;
+      }
+      .hidden-data {
+        display: none;
+        visibility: hidden;
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+        border-bottom: .1em solid var(--gray-light);
+      }
+      #info address{
+        background-color: var(--gray-light);
+        color: rgba(0, 0, 0, .8);
+        font-size: .8em;
+        display: grid;
+      }
+      
+       /* Toggle */
+      #recordHead {
+        cursor: pointer;
+      };
+      #recordContent{
+        /* visibility: hidden;
+        display: none; */
+      }
+      #record-container {
+        display: grid;
+        grid-gap: .39em;
+      }
+      .record-item {
+        
+      }
+      
+      .record-item-time {
+        text-align: right;
+        float: left;
+        /* background-color: red; */
+        color: var(--black-dark);
+      }
+    </style>
+  </head>
+  <body>
+    <n id="app">
+      <div class="btns">
+        <button id="startCount" class="btn">Start</button>
+        <button id="stopCount" class="btn">Stop</button>
+        <button id="resetCount" class="btn">Reset</button>
+        <button id="saveBtn" show="false" class="btn">Save</button>
+      </div>
+      <div class="board">
+        <div class="two-col">
+          <h4>Start</h4>
+          <span id="hiddenData" class="hidden-data"></span>
+          <p id="startTime"></p>
+        </div>
+        <div class="two-col">
+          <h4>Stop</h4>
+          <p id="stopTime"></p>
+        </div>
+        <div>
+          <h4>Elapsed time</h4>
+          <p id="elapsedTime">00:00:00</p>
+        </div>
+      </div>
+      
+
+      <div id="record" class="board">
+        <!-- <h4>Record 	&#129095;</h4>
+        <h4>Record 	&#129079;</h4>
+        <h4>Record 	&#11015;</h4>
+        <h4>Record 	&#129155;</h4> -->
+        <h4 id="recordHead">Record 	&#129035;</h4>
+        <!-- <h4>Record 	&#129171;</h4> -->
+        <div id="loadRecord">
+          <button id="loadRecordBtn" class="btn">Load</button>
+          <button id="clearStorageBtn" class="btn">Clear</button>
+
+          <div id="record-container">
+            <!-- Js code will create elements here-->
+          </div>
+        </div>
+
+      </section>
+
+      <div id="info" class="board">
+        <h4>Info</h4>
+        <address>
+          <span>Howork, 2020</span>
+          <span>Ryu Sung Chul</span>
+          <a href="mailto:daka0522@gmail.com">daka0522@gmail.com</a>
+          <span>Seoul, South Korea</span>
+        </address>
+
+        <div id="infoContent"></div>
+        
+      </div>
+
+      
+    </div>
+
+
+    <!-- <script src="popup.js"></script> -->
+
+    <!-- <script src="storageTut.js"></script> -->
+    <script src="stopwatch-self.js"></script>
+    <script src="css_actions.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "Howork", 
+  "version": "1.0",
+  "description": "Check and log the times how many you really work",
+  "author": "Ryu Sung Chul",
+
+  "icons": {
+    "16": "icons/howork-16.png",
+    "32": "icons/howork-32.png",
+    "48": "icons/howork-48.png",
+    "128": "icons/howork-128.png"
+  },
+  
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/howork-16.png",
+      "32": "icons/howork-32.png",
+      "48": "icons/howork-48.png",
+      "128": "icons/howork-128.png"
+    }
+  },
+  
+  "permissions": ["storage"],
+  
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+
+
+  "manifest_version": 2
+}
+
+  
