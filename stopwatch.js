@@ -1,4 +1,4 @@
-// @Documnet element references
+// # Documnet element references
 // Clock 
 const startTime = document.getElementById('startTime')
 const stopTime = document.getElementById('stopTime')
@@ -16,34 +16,21 @@ const loadRecordBtn = document.getElementById('loadRecordBtn')
 const recordContainer = document.getElementById('record-container')
 const saveBtn = document.getElementById('saveBtn')
 
-// Temp
-const info = document.getElementById('info')
-const infoContent = document.getElementById('infoContent')
-
-// @ Variables 
+// # Variables 
 let elapsed
 let start_time
 let stop_time
 
-// @ Event listeners 
-// Start count  record start time
+// # Event listeners 
+// Stopwatch
 startCountBtn.addEventListener('click', () => {
   startCounting();
 })
-
 stopCountBtn.addEventListener('click', () => {
   stopCounting()
 })
 resetCountBtn.addEventListener('click', () => {
   reset()
-})
-clearStorageBtn.addEventListener('click', () => {
-  chrome.storage.sync.clear(
-    () => {alert("Your all record is cleared.")}
-  )
-})
-loadRecordBtn.addEventListener('click', () => {
-  loadData()
 })
 saveBtn.addEventListener('click', () => {
   if (elapsed) {
@@ -53,24 +40,17 @@ saveBtn.addEventListener('click', () => {
   }
 })
 
+// Record
+loadRecordBtn.addEventListener('click', () => {
+  loadData()
+})
+clearStorageBtn.addEventListener('click', () => {
+  chrome.storage.sync.clear(
+    () => {alert("Your all record is cleared.")}
+  )
+})
 
-// @ Utils
-// @@ Some prototypings
-// Number prototype of padding two prefix
-Number.prototype.padNum = function() {
-  return this.toString().padStart(2, 0).slice(0, 2)
-}
-// Check this object is empty
-Object.prototype.isEmpty = function() {
-  for (var key in this) {
-    return this.hasOwnProperty(key) ? false : true 
-  }
-}
-
-
-
-
-// @ Initializing
+// # Initializing
 function init() {
   // Get stored started data and render it using hidden data.
   chrome.storage.sync.get(
@@ -90,7 +70,7 @@ function init() {
   loadData()
 }
 
-// @ functions 
+// # Functions 
 function loadData() {
   // Download all the records
   chrome.storage.sync.get(
@@ -225,7 +205,7 @@ function reset() {
   elapsedTime.innerText = null
 }
 
-// @ Events 
+
 function record(savedTime, data) {
   let form = {}
   form[savedTime] = data 
@@ -315,30 +295,6 @@ function getTime(ms) {
   return [ms, s, m, h].map(e => Math.floor(e).padNum())
 }
 
-// @ Time and date format functions 
-function convertMillisToTime(ms) {
-  let s = m = h = d = 0
-  
-  // Seconds?
-  s = ms / 1000
-  
-  while (s >= 60) {
-    m = s / 60 
-    s = s % 60 
-  }
-
-  // Minutes? 
-  m = ms / (1000 * 60)
-
-  // Hours?
-  h = ms / (1000 * 60 * 60)
-
-  // Day?
-  d = ms / (1000 * 60 * 60 * 24)
-
-  return [ms, s, m, h, d].map(e => Math.floor(e).padNum())
-}
-
 function dateFormat(time) {
   let date = new Date(time)
 
@@ -375,5 +331,17 @@ function timeFormat(time) {
 
   return `${h}:${min}:${s}`
 }
+
+
+
+
+// # Utils 
+// - Some prototypings
+// Number prototype of padding two prefix
+Number.prototype.padNum = function() {return  this.toString().padStart(2, 0).slice(0, 2) } 
+// Check this object is empty
+Object.prototype.isEmpty = function() { for (var key in this) { return this.hasOwnProperty(key) ? false : true }}
+
+
 
 init()
