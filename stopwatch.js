@@ -3,7 +3,9 @@
 const startTime = document.getElementById('startTime')
 const stopTime = document.getElementById('stopTime')
 const elapsedTime = document.getElementById('elapsedTime')
-const hiddenData = document.getElementById('hiddenData')
+
+// Earth time effect
+const earth = document.querySelector('#earth-cont')
 
 // Buttons 
 const startCountBtn = document.getElementById('startCount')
@@ -17,6 +19,7 @@ const recordContainer = document.getElementById('record-container')
 const saveBtn = document.getElementById('saveBtn')
 
 // # Variables 
+let now
 let elapsed
 let start_time
 let stop_time
@@ -25,12 +28,15 @@ let stop_time
 // Stopwatch
 startCountBtn.addEventListener('click', () => {
   startCounting();
+  earth.setAttribute('state', 'on')
 })
 stopCountBtn.addEventListener('click', () => {
   stopCounting()
+  earth.setAttribute('state', 'off')
 })
 resetCountBtn.addEventListener('click', () => {
   reset()
+  earth.setAttribute('state', 'off')
 })
 saveBtn.addEventListener('click', () => {
   if (elapsed) {
@@ -52,17 +58,18 @@ clearStorageBtn.addEventListener('click', () => {
 
 // # Initializing
 function init() {
-  // Get stored started data and render it using hidden data.
+  // Load stored started data 
   chrome.storage.sync.get(
     'startTime',
     function(result) {
       if (result.isEmpty()) {
-        hiddenData.innerText = null
+        start_time = null
       } else {
         let st = result['startTime']
-        // hidden data to share the value between functions
-        hiddenData.innerText = st 
-        startTime.innerText = dateFormat(new Date(st)) + timeFormat(new Date(st))
+        start_time = st 
+        startTime.textContent = dateFormat(new Date(st)) + timeFormat(new Date(st))
+
+        earth.setAttribute('state', 'on')
       }
     }
   )
@@ -115,29 +122,23 @@ function loadData() {
 
         let ol 
         let wrapper
-        
         let createTotal
         // If there's no day tags then create new 
         if (document.getElementById(id))  {
           ol = document.getElementById(id)
-          wrapper = document.getElementById(id)
         } else {
-          wrapper = document.createElement('div')
-          wrapper.id = id 
-          wrapper.className = 'record-item'
-
           ol = document.createElement('ol')
-          // ol.id = id 
-          // ol.className = 'record-item'
+          ol.id = id 
+          ol.className = 'record-item'
 
           // Initialize total value when it's newly created  and create element
           
-          total = 0
+          // total = 0
         }
         createTotal = document.createElement('p')
 
-        if (wrapper && !wrapper.hasAttribute('order')) {
-          wrapper.setAttribute ('order', dayGap)
+        if (ol && !ol.hasAttribute('order')) {
+          ol.setAttribute ('order', dayGap)
         }
         
         // 2. Unnamed lists
@@ -159,16 +160,13 @@ function loadData() {
         // 5. Get total sum
         total += value
         createTotal.textContent = total
-        
-
 
         // Finally, append childs 
         li.appendChild(createTitle)
         li.appendChild(createContent)
 
         ol.appendChild(li)
-        wrapper.appendChild(ol)
-        recordContainer.appendChild(wrapper)
+        recordContainer.appendChild(ol)
       })
       console.log("can i?", total);
       
@@ -194,16 +192,7 @@ function loadData() {
   )
 }
 
-function reset() {
-  chrome.storage.sync.remove(['startTime', 'stopTime'],
-  () => {
-    alert("Remove times in storage. successfully")
-  })
-  startTime.innerText = null
-  hiddenData.innerText = null
-  stopTime.innerText = null
-  elapsedTime.innerText = null
-}
+
 
 
 function record(savedTime, data) {
@@ -219,29 +208,24 @@ function record(savedTime, data) {
   reset()
 }
 
-
-// Count time, loop 
-function countTime() {
-  setInterval(() => {}, interval);
-}
-
-
+// # Functions
+// 1. Start
 function startCounting() {
   // Get the now time
-  let now = Date.now()
+  start_time = Date.now()
 
   // Save to storage
   chrome.storage.sync.set({
-    'startTime': now
+    'startTime': start_time
   })
-  hiddenData.innerText = now 
   // And update the info in the document
-  startTime.innerText = dateFormat(now) + timeFormat(now)
+  startTime.textContent = dateFormat(start_time) + timeFormat(start_time)
 }
 
+// 2. Stop
 function stopCounting() {
   // Firstly check if there's the started time
-  if (!hiddenData.innerText) {
+  if (!start_time) {
     return 
   } else {
     // Get the now time 
@@ -251,10 +235,11 @@ function stopCounting() {
     chrome.storage.sync.set({
       'stopTime': now
     })
+    
     // And update the info in the document
-    stopTime.innerText = dateFormat(now) + timeFormat(now)
+    stopTime.textContent = dateFormat(now) + timeFormat(now)
     // Finally update the elapsed time!  
-    elapsed = now - hiddenData.innerText
+    elapsed = now - start_time
   
     let time = getTime(elapsed)
     
@@ -265,33 +250,35 @@ function stopCounting() {
     // day
     // d = time[4]
     elapsed_time = `${h}:${m}:${s}:${ms}`
-    elapsedTime.innerText = elapsed_time
+    elapsedTime.textContent = elapsed_time
   }
+}
+
+// 3. Reset
+function reset() {
+  chrome.storage.sync.remove(['startTime', 'stopTime'],
+  () => {
+    alert("Remove times in storage. successfully")
+  })
+  startTime.textContent = null
+  stopTime.textContent = null
+  elapsedTime.textContent = null
 }
 
 // @ get time
 function getTime(ms) {
   let s = m = h = 0
   s = ms / 1000
-  console.log("S: ", s)
 
   if (s >= 60) {
     m = s / 60 
-    console.log("M in a while: ", m);
     s = s % 60
-    console.log("S after s % 60: ", s);
 
     if (m >= 60) {
       h = m / 60 
-      console.log("H in a second while", h);
       m = m % 60 
-      console.log("M after m % 60", m);
     }
-    console.log("After second while: ", h, m, s);
-    
   }
-
-  console.log("After while loop m and s: ", m, s );
   return [ms, s, m, h].map(e => Math.floor(e).padNum())
 }
 
@@ -302,9 +289,6 @@ function dateFormat(time) {
   let year = date.getFullYear()
 
   // Month?
-  // getMont function returns value from array indicices. 
-  // So January is 0.
-  // Make it plus 1 to readable for human
   let month = date.getMonth() + 1
 
   // Day?

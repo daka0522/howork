@@ -1,0 +1,86 @@
+// Common properties
+$earth-size: 4.24em;
+
+$width: $earth-size;
+$height: $earth-size;
+
+// ON
+$earth-shadow: rgba(128, 0, 255, 0.5);
+$sun-light : hsl(60, 100, 50);
+$shade: hsl(210, 100, 50);
+$shade-sub : hsl(240, 100, 50);
+
+// OFF
+$off-shadow: #807689;
+$off-shade: #768089;
+$off-shade-sub: #767689;
+
+
+#earth-cont {
+  display: flex;
+  margin: 1.6em;
+  justify-content: center;
+
+  &[state=on] {
+    #earth {
+      background-color: $sun-light;
+      box-shadow: 0 0 $earth-size/4.24 .026em rgba($shade, 1) inset;
+    }
+
+    #earth-shadow {
+      /* Animation */
+      animation-name: rotate;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      // animation-iteration-count: 2;
+    }
+
+    #earth-sub {
+      box-shadow: 0 0 .38em .09em rgba($shade-sub, .5);
+    }
+
+    @keyframes rotate {
+      0% {
+        box-shadow: 0em (-$earth-size) $earth-size .1em rgba($earth-shadow, .75) inset;
+      }
+      50% {
+        box-shadow: 0em 0 ($earth-size/2) .1em $earth-shadow inset;
+      }
+      100% {
+        box-shadow: 0em $earth-size $earth-size .1em rgba($earth-shadow, .75) inset;
+      }
+    }
+  }
+
+  &[state=off] {
+    #earth {
+      background-color: transparent;
+      box-shadow: 0 0 $earth-size/4.24 .026em rgba($off-shade, .25) inset;
+    }
+
+    #earth-shadow {
+      box-shadow: 0em 0 ($earth-size/2) .1em rgba($off-shadow, .25) inset;
+    }
+
+    #earth-sub {
+      box-shadow: 0 0 .38em .09em rgba($off-shade-sub, .25);
+    }
+  }
+}
+
+
+.ball {
+  width: $width;
+  height: $height;
+  border-radius: 50%;
+  /* Earth tilt */
+  transform: rotateZ(23.5deg);
+}
+
+#earth-shadow {
+  position: absolute;
+}
+
+#earth-sub {
+  position: absolute;
+}

@@ -1,24 +1,40 @@
 <html>
+
 <head>
   <link href="styles/css_actions.css" rel="stylesheet">
-  <link href="styles/main.css" rel="stylesheet">
+  <link href="styles/main.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles/earth_effect.min.css">
   <link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
-  <style></style>
+  <style>
+
+  </style>
 </head>
 
 <body>
-  <div id="app">
-    <div class="btns">
-      <button id="startCount" class="btn">Start</button>
-      <button id="stopCount" class="btn">Stop</button>
-      <button id="resetCount" class="btn">Reset</button>
-      <button id="saveBtn" show="false" class="btn">Save</button>
-    </div>
+  <main id="app">
+     <!-- Diplaying earth effect section -->
+    <section id="earth-cont" state="off">
+      <div id="earth" class="ball"></div>
+      <div id="earth-shadow" class="ball"></div>
+      <div id="earth-sub" class="ball"></div>
+    </section>
 
-    <div class="board">
+     <!-- Buttons  -->
+    <section>
+      <div>
+        <button id="startCount" class="btn">Start</button>
+        <button id="stopCount" class="btn">Stop</button>
+      </div>
+      <div>
+        <button id="resetCount" class="btn">Reset</button>
+        <button id="saveBtn" show="false" class="btn">Save</button>
+      </div>
+    </section>
+
+    <!-- Displaying the times -->
+    <section class="board">
       <div class="two-col">
         <h4>Start</h4>
-        <span id="hiddenData" class="hidden-data"></span>
         <p id="startTime"></p>
       </div>
       <div class="two-col">
@@ -29,15 +45,11 @@
         <h4>Elapsed time</h4>
         <p id="elapsedTime">00:00:00</p>
       </div>
-    </div>
+    </section>
 
-    <div id="record" class="board">
-      <!-- <h4>Record 	&#129095;</h4>
-        <h4>Record 	&#129079;</h4>
-        <h4>Record 	&#11015;</h4>
-        <h4>Record 	&#129155;</h4>
-      <h4>Record &#129171;</h4> -->
-      <h4 id="recordHead">Record &#129035;</h4>
+    <!-- Displaying records -->
+    <section id="record" class="board">
+      <h4 id="recordHead">Records</h4>
       <div id="loadRecord">
         <button id="loadRecordBtn" class="btn">Load</button>
         <button id="clearStorageBtn" class="btn">Clear</button>
@@ -46,23 +58,24 @@
           <!-- Js code will create elements here-->
         </div>
       </div>
-      </section>
+    </section>
 
-      <div id="info" class="board">
-        <h4>Info</h4>
-        <address>
-          <span>Howork, 2020</span>
-          <span>Ryu Sung Chul</span>
-          <a href="mailto:daka0522@gmail.com">daka0522@gmail.com</a>
-          <a href="https://github.com/daka0522/howork"
-          title="Open source of the project, howork">github.com/daka0522/howork</a>
-          <span>Seoul, South Korea</span>
-        </address>
-      </div>
-    </div>
+    <!-- Additional infos about the app  -->
+    <footer id="info" class="board">
+      <h4>Info</h4>
+      <address>
+        <span>Howork, 2020</span>
+        <span>Ryu Sung Chul</span>
+        <a href="mailto:daka0522@gmail.com">daka0522@gmail.com</a>
+        <a href="https://github.com/daka0522/howork" title="Open source of this project">github.com/daka0522/howork</a>
+        <span>Seoul, South Korea</span>
+      </address>
+    </footer>
+  </main>
 
-    <!-- <script src="popup.js"></script> -->
-    <script src="stopwatch.js"></script>
-    <script src="css_actions.js"></script>
+  <!-- <script src="popup.js"></script> -->
+  <script src="stopwatch.js"></script>
+  <!-- <script src="css_actions.js"></script> -->
 </body>
+
 </html>

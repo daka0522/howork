@@ -1,0 +1,134 @@
+// Color valiables 
+  /* white */
+  $white: rgba(255, 255, 255, 1);
+  $white-light: rgba(255, 255, 255, .625);
+  $white-dark: rgba(255, 255, 255, .39);
+
+  /* gray */
+  $gray-light: rgba(159, 159, 159, .09);
+  $gray-dark: rgba(159, 159, 159, .16);
+
+  /* black */
+  $black-light:rgba(0, 0, 0, .39);
+  $black-dark:  rgba(0, 0, 0, .625);
+
+  /* green */
+  $green-light: rgba(0, 159, 0, .625);
+
+
+body {
+  font-family: 'Philosopher', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6rem;
+
+  background-color: $gray-light;
+  margin: 0;
+  padding: 0;
+  & * {
+    font-family: inherit;
+  }
+}
+#app {
+  display: grid;
+  width: 16.77em;
+  grid-gap: .625em;
+  padding: .62rem 0 .62rem 0;
+  text-align: center;
+  
+  & *:link, *:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+/* #app *:disabled {
+  background-color: red;;
+} */
+#app ul, ol, li {
+  list-style: none;
+  padding: 0;
+  // $black-light
+}
+
+// Component alsss common property 
+.btn, .board {
+  border-radius: .48em;
+}
+
+.btn {
+  color: $black-dark;
+  background-color: $white-dark;
+  box-shadow: 0 0 .625em .1em $gray-dark;
+  padding: .24em .15em .24em .15em;
+  border-style: none;
+  margin: .39em;
+
+  height: 2.56em;
+  width: 6.55em;
+
+  cursor: pointer;
+  // font-weight: bold;
+
+  &:active {
+    transform: scale(.9);
+  background-color: $green-light;
+  color: $white;
+  }
+}
+
+.board {
+  background-color: $white;
+  padding: .48em;
+  border-top: .16em solid $gray-light;
+  border-bottom: .16em solid $gray-light;
+  // width: 100%;
+}
+
+p, h4 {
+  margin: .4rem 0 $black-light 0;
+}
+h4 {
+  color: $black-dark;
+  font-weight: 400;
+}
+#elapsedTime {
+  font-size: 1.6em;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  // border-bottom: .1em solid $gray-light;
+}
+
+#info address{
+  background-color: $gray-light;
+  color: rgba(0, 0, 0, .8);
+  font-size: .8em;
+  display: grid;
+  width: auto;
+}
+
+ /* Toggle */
+#recordHead {
+  cursor: pointer;
+};
+#recordContent{
+  /* visibility: hidden;
+  display: none; */
+}
+#record-container {
+  display: grid;
+  grid-gap: .39em;
+}
+.record-item {
+  display:grid;
+  
+}
+
+.record-item-time {
+  margin-left: 1.6em;
+  float: left;
+  color: $black-dark;
+}
