@@ -33,6 +33,7 @@ saveBtn.addEventListener('click', () => {
 // 2. Record
 clearRecordBtn.addEventListener('click', () => {
   record.clear()
+  recordHistoryRef.innerHTML = ''
 })
 
 
