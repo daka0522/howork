@@ -1,81 +1,70 @@
-<html>
+<html lang="en">
 
 <head>
-  <link href="styles/css_actions.css" rel="stylesheet">
-  <link href="styles/main.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="styles/earth_effect.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
-  <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  </style>
+  <link rel="stylesheet" type="text/css" href="styles/stopwatch.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/component.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/main.min.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Kalam|Courier+Prime&display=swap" rel="stylesheet">
+  <title>Howork - Time checker</title>
 </head>
 
 <body>
-  <main id="app">
-     <!-- Diplaying earth effect section -->
-    <section id="earth-cont" state="off">
-      <div id="earth" class="ball"></div>
-      <div id="earth-shadow" class="ball"></div>
-      <div id="earth-sub" class="ball"></div>
+  <main id='app' theme="default">
+    <section id='stopwatch' class="board" state="off">
+      <div id="ball"></div>
+      <p id="clock" class="time">00:00:00</p>
     </section>
 
-     <!-- Buttons  -->
-    <section>
-      <div>
-        <button id="startCount" class="btn">Start</button>
-        <button id="stopCount" class="btn">Stop</button>
-      </div>
-      <div>
-        <button id="resetCount" class="btn">Reset</button>
-        <button id="saveBtn" show="false" class="btn">Save</button>
-      </div>
+    <section id="buttons">
+      <button id="startBtn" class="btn">Start</button>
+      <button id="stopBtn" class="btn">Stop</button>
+      <button id="resetBtn" class="btn">Reset</button>
+      <button id="saveBtn" class="btn">Save</button>
     </section>
 
-    <!-- Displaying the times -->
-    <section class="board">
-      <div class="two-col">
+    <section id='displayTime' class="board">
+      <div id="startTimeCont" class="time-cont">
         <h4>Start</h4>
-        <p id="startTime"></p>
+        <p id="startTime" class="time"></p>
       </div>
-      <div class="two-col">
+      <div id="stopTimeCont" class="time-cont">
         <h4>Stop</h4>
-        <p id="stopTime"></p>
+        <p id="stopTime" class="time"></p>
       </div>
-      <div>
-        <h4>Elapsed time</h4>
-        <p id="elapsedTime">00:00:00</p>
-      </div>
+      
     </section>
 
-    <!-- Displaying records -->
-    <section id="record" class="board">
-      <h4 id="recordHead">Records</h4>
-      <div id="loadRecord">
-        <button id="loadRecordBtn" class="btn">Load</button>
-        <button id="clearStorageBtn" class="btn">Clear</button>
-
-        <div id="record-container">
-          <!-- Js code will create elements here-->
+    <section id="displayRecord" class="board">
+      <div id="record">
+        <div id="recordHistory">
+          <!-- Javascript will generate child elements -->
         </div>
+        <button id="clearRecordBtn" class="btn">Clear Record</button>
       </div>
     </section>
 
-    <!-- Additional infos about the app  -->
     <footer id="info" class="board">
+      <div id="option">
+        <span>Dark Theme</span>
+        <input type="checkbox" id="themeSelector" onclick="themeChanger()">
+      </div>
       <h4>Info</h4>
       <address>
         <span>Howork, 2020</span>
         <span>Ryu Sung Chul</span>
-        <a href="mailto:daka0522@gmail.com">daka0522@gmail.com</a>
         <a href="https://github.com/daka0522/howork" title="Open source of this project">github.com/daka0522/howork</a>
-        <span>Seoul, South Korea</span>
+        <a href="mailto:daka0522@gmail.com">daka0522@gmail.com</a>
       </address>
     </footer>
   </main>
 
-  <!-- <script src="popup.js"></script> -->
   <script src="stopwatch.js"></script>
-  <!-- <script src="css_actions.js"></script> -->
+  <script src="main.js"></script>
 </body>
 
 </html>

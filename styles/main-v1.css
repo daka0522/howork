@@ -1,0 +1,115 @@
+/* white */
+/* gray */
+/* black */
+/* green */
+body {
+  font-family: 'Philosopher', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  background-color: rgba(159, 159, 159, 0.09);
+  margin: 0;
+  padding: 0;
+}
+
+body * {
+  font-family: inherit;
+}
+
+#app {
+  display: grid;
+  width: 16.77em;
+  grid-gap: .625em;
+  padding: .62rem 0 .62rem 0;
+  text-align: center;
+}
+
+#app *:link, #app *:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+#app ul, ol, li {
+  list-style: none;
+  padding: 0;
+}
+
+.btn, .board {
+  border-radius: .48em;
+}
+
+.btn {
+  color: rgba(0, 0, 0, 0.625);
+  background-color: rgba(255, 255, 255, 0.39);
+  box-shadow: 0 0 0.625em 0.1em rgba(159, 159, 159, 0.16);
+  padding: .24em .15em .24em .15em;
+  border-style: none;
+  margin: .39em;
+  height: 2.56em;
+  width: 6.55em;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.9);
+  background-color: rgba(0, 159, 0, 0.625);
+  color: white;
+}
+
+.board {
+  background-color: white;
+  padding: .48em;
+  border-top: 0.16em solid rgba(159, 159, 159, 0.09);
+  border-bottom: 0.16em solid rgba(159, 159, 159, 0.09);
+}
+
+p, h4 {
+  margin: .4rem 0 .4rem 0;
+}
+
+h4 {
+  color: rgba(0, 0, 0, 0.625);
+  font-weight: 400;
+}
+
+#elapsedTime {
+  font-size: 1.6em;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+
+#info address {
+  background-color: rgba(159, 159, 159, 0.09);
+  color: rgba(0, 0, 0, 0.8);
+  font-size: .8em;
+  display: grid;
+  width: auto;
+}
+
+/* Toggle */
+#recordHead {
+  cursor: pointer;
+}
+
+#recordContent {
+  /* visibility: hidden;
+  display: none; */
+}
+
+#record-container {
+  display: grid;
+  grid-gap: .39em;
+}
+
+.record-item {
+  display: grid;
+}
+
+.record-item-time {
+  margin-left: 1.6em;
+  float: left;
+  color: rgba(0, 0, 0, 0.625);
+}

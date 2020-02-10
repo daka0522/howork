@@ -1,0 +1,54 @@
+// Colors 
+// 1. Monotone
+$white: rgba(255, 255, 255, 1);
+$white-light: rgba(255, 255, 255, .75);
+$white-dark: rgba(255, 255, 255, .1);
+
+$gray-light: rgba(127.5, 127.5, 127.5, .25);
+$gray-dark: rgba(127.5, 127.5, 127.5, .75);
+
+$black-light: rgba(0, 0, 0, .5);
+$black-dark: rgba(0, 0, 0, .75);
+
+// 2. Colors
+$green: hsl(90, 100, 30);
+
+// Main concept color
+// Yellow! and analogous colors
+// c(Color)-main(Roll)-(property)
+$c-main: hsl(60, 100, 50);
+$c-main-a1: #80ff00;
+$c-main-a2: #ff8000;
+
+// Complementary colors
+$c-main-comp: #0000ff;
+$c-main-a1-comp: #7f00ff;
+$c-main-a2-comp: #007fff;
+
+
+// ! HSL
+
+/* $H: 
+$S:
+$L: 
+ */
+
+// ! Theme try
+
+// bg color 
+$c-bg: rgba($gray-light, .05);
+
+/* // bg sub color
+$c-bg-sub: ;
+
+// bg extra
+$c-bg-ext: ;
+
+// font-color
+$c-font: ;  */
+
+// font sub color 
+$c-font-sub: $black-dark;
+
+// font extra 
+$c-font-extra: $black-light;

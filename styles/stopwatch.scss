@@ -1,0 +1,44 @@
+@import '__variables_color.scss';
+@import '__variables_size.scss';
+
+/* #ms {
+  margin-left: .8rem;
+  font-size: 4.8rem;
+  width: $ms-width * 1.5;
+}; */
+
+
+#ball {
+  $ball-size: 2.62rem;
+
+  width: $ball-size;
+  height: $ball-size;
+  border-radius: 50%;
+
+  transform: rotateZ(23.5deg);
+
+  margin: $ball-size / 2
+}
+
+// Stop watch on and off handling
+#stopwatch {
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  &[state=on] {
+    #ball {
+      box-shadow: 0 0 .25rem .025rem $gray-light;
+      background: radial-gradient(ellipse at 0 0, $c-main 0%, $c-main-a2 100%);
+    }
+  }
+  &[state=off] {
+    #ball {
+      box-shadow: 0 0 .25rem .025rem $gray-light;
+      background: radial-gradient(ellipse at 0 0, $white-light 0%, $gray-dark 100%);
+    }
+  }
+}
+

@@ -1,36 +1,32 @@
 {
+
+  "manifest_version": 2,
   "name": "Howork", 
-  "version": "1.0",
+  "version": "3.0",
   "description": "Working time manager",
   "author": "Ryu Sung Chul",
 
   "icons": {
-    "16": "icons/howork-v2-16.png",
-    "32": "icons/howork-v2-32.png",
-    "48": "icons/howork-v2-48.png",
-    "128": "icons/howork-v2-128.png"
+    "16": "icons/howork-v3-16.png",
+    "32": "icons/howork-v3-32.png",
+    "48": "icons/howork-v3-48.png",
+    "128": "icons/howork-v3-128.png"
   },
   
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "icons/howork-v2-16.png",
-      "32": "icons/howork-v2-32.png",
-      "48": "icons/howork-v2-48.png",
-      "128": "icons/howork-v2-128.png"
+      "16": "icons/howork-v3-16.png",
+      "32": "icons/howork-v3-32.png",
+      "48": "icons/howork-v3-48.png",
+      "128": "icons/howork-v3-128.png"
     }
   },
   
-  "permissions": ["storage"],
+  "permissions": ["storage"]
   
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
 
 
-
-  "manifest_version": 2
 }
 
   

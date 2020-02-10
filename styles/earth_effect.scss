@@ -54,7 +54,6 @@ $off-shade-sub: #767689;
 
   &[state=off] {
     #earth {
-      background-color: transparent;
       box-shadow: 0 0 $earth-size/4.24 .026em rgba($off-shade, .25) inset;
     }
 
