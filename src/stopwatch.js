@@ -29,6 +29,8 @@ resetBtn.addEventListener('click', () => {
 })
 saveBtn.addEventListener('click', () => {
   currentTimer.save()
+  // Record history reload 
+  record.load()
 })
 // 2. Record
 clearRecordBtn.addEventListener('click', () => {
@@ -43,8 +45,6 @@ class CountTime {
     this.startTime = null
     this.stop = null
     this.elapsed = null
-
-    
   }
   get start() {
     return this.startTime
@@ -62,9 +62,11 @@ class CountTime {
   startCounting() {
     let now = new Date
     this.start = now
-    
+
     // DB
-    record.create({startTime: now.getTime()})
+    record.create({
+      startTime: now.getTime()
+    })
 
     this.startTimer()
   }
@@ -76,7 +78,9 @@ class CountTime {
       this.stopTimer()
 
       // DB
-      record.create({stopTime: now.getTime()})
+      record.create({
+        stopTime: now.getTime()
+      })
 
       // Render
       stopTimeRef.textContent = now.toLocaleString()
@@ -106,21 +110,19 @@ class CountTime {
   }
   // Save the elapsed time 
   save() {
-    let now = Date.now()
+    if (this.elapsed) {
+      let now = Date.now()
 
-    // DB
-    let data = {}
-    data[now] = this.elapsed
-    record.create(data)
-
+      // DB
+      let data = {}
+      data[now] = this.elapsed
+      record.create(data)
+    }
     // Stop timer
     this.stopTimer()
 
     // Reset 
     this.reset()
-
-    // Record history reload 
-    record.timeHistory()
   }
 
   startTimer() {
@@ -140,22 +142,24 @@ class CountTime {
 
       this.elapsed = current_elapsed
 
-      let elapsed_format = getTime(current_elapsed)
-
-      clock.textContent = `${elapsed_format[2]}:${elapsed_format[1]}:${elapsed_format[0]}`
+      clock.textContent = ms2time(current_elapsed)
     }, interval)
 
     // Ball effect
     stopwatch.setAttribute('state', 'on')
 
     // Badge effect ON
-    chrome.browserAction.setBadgeText({text: "ON"}, ()=>{})
+    chrome.browserAction.setBadgeText({
+      text: "ON"
+    }, () => {})
   }
   stopTimer() {
     clearInterval(this.counting)
     stopwatch.setAttribute('state', 'off')
     // Badge effect OFF
-    chrome.browserAction.setBadgeText({text: ""}, ()=>{})
+    chrome.browserAction.setBadgeText({
+      text: ""
+    }, () => {})
   }
 }
 
@@ -163,7 +167,7 @@ class CountTime {
 // # Record class
 class Record {
   constructor() {
-    this.historyData = ['a']
+    this.historyData = []
   }
   // 1. Create, Update
   create(data) {
@@ -175,18 +179,16 @@ class Record {
   // 2. Read
   // Read specified key
   read(key) {
-    let data 
+    let data
     chrome.storage.sync.get(key, function(result) {
       if (result.isEmpty()) {
-        // alert("The object is empty in sync storage: ", key, result)
-        data = null 
+        data = null
       } else {
         let item = result[key]
-        data =   item
+        data = item
       }
     })
     return data
-
   }
 
   // 4. Delete
@@ -198,124 +200,106 @@ class Record {
   }
   // Clear all data in sync
   clear() {
-    chrome.storage.sync.clear(()=>{
+    chrome.storage.sync.clear(() => {
       // alert("Storage cleared successfully!")
     })
   }
 
-  timeHistory(){
-    // init
-    recordHistoryRef.innerHTML = ''
-
+  load() {
     chrome.storage.sync.get(
       null,
-      function(result) {
-        let keys = Object.keys(result)
-        // Read only the elapsed time datas
-        keys = keys.filter(e => e.match(/\d+/))
-        
-        let total 
-
-        keys.forEach(key => {
-          let value = result[key]
-
-          let savedDate = new Date(parseInt(key))
-          let savedDay = savedDate.getDate()
-
-          let today = new Date().getDate()
-          let dayGap = today - savedDay
-
-          let day
-          if (0 <= dayGap < 4) {
-            switch (dayGap) {
-              case 0: day = 'Today'; break; 
-              case 1: day = 'Yesterday'; break;
-              case 2: day = '2 days ago'; break;
-              case 3: day = '3 days ago'; break;
-            }
-          } else { day = savedDay }
-
-          let id = day.toLowerCase()
-
-          // 1. List container job
-          let ol 
-          
-          
-
-          if (document.getElementById(id)) {
-            ol = document.getElementById(id)
-          } else {
-            // Create new list
-            ol = document.createElement('ol')
-            ol.id = id
-            ol.setAttribute('order', dayGap)
-
-            // And create day name
-            let dayTitle = document.createElement('h4')
-            dayTitle.textContent = day.toUpperCase()
-
-            // Create total sum
-            let sumNode = document.createElement('p')
-            sumNode.id = `record-total-${id}`
-            sumNode.className = 'time record-total'
-            // sumNode.className = 'record-total'
-
-            let tempFrg = new DocumentFragment()
-            tempFrg.appendChild(dayTitle)
-            tempFrg.appendChild(sumNode)
-
-            ol.appendChild(tempFrg)
-
-            // Initialize total value
-            total = 0
-          }
-
-          // 2. List item job 
-          let li = document.createElement('li')
-          li.className = 'record-item'
-
-          // 3. Contents in List item job 
-          // title - saved date
-          let savedDateNode = document.createElement('p')
-          savedDateNode.textContent = savedDate.toLocaleTimeString()
-          savedDateNode.className = 'record-item-date'
-          
-          // content - elapsed time
-          let content = document.createElement('p')
-          // Time formatting - return array sec, min, hour
-          let t = getTime(value)
-          content.textContent = `${t[2]}:${t[1]}:${t[0]}` 
-          content.className = 'record-item-value'
-
-          // Get total sum 
-          total += value 
-
-          let dayTotalNode = document.querySelector(`#record-total-${id}`)
-          if (dayTotalNode) {
-            let t = getTime(total)
-            dayTotalNode.textContent = `${t[2]}:${t[1]}:${t[0]}` 
-            console.log(dayTotalNode);
-          }
-          
-          
-          
-          // dayTotalNode.textContent += value
-
-          // let frag1 = new DocumentFragment()
-          li.appendChild(savedDateNode)
-          li.appendChild(content)
-
-          let frag = new DocumentFragment()
-          frag.appendChild(li)
-
-          ol.appendChild(frag)
-          
-          recordHistoryRef.appendChild(ol)          
+      result => {
+        let keys = Object.keys(result).filter(key => key.match(/[^\d{13,13}]+/))
+        keys.forEach(e => {
+          delete result[e]
         })
+
+        this.render(result)
       }
     )
+  }
+  render(record) {
+    recordHistoryRef.innerHTML = ''
 
-    
+    let data = {}
+
+
+    Object.entries(record).forEach((item, index) => {
+      const key = item[0]
+      const value = item[1]
+
+      let savedDateObj = new Date(parseInt(key))
+      let savedDate = savedDateObj.toDateString()
+      let savedTime = savedDateObj.toLocaleTimeString()
+
+      // Initialize
+      let ol
+      if (!data[savedDate]) {
+        data[savedDate] = new Object
+        data[savedDate]['total'] = 0
+
+        ol = document.createElement('ol')
+        ol.id = savedDate
+
+
+        
+      } else {
+        ol = document.getElementById(savedDate)
+      }
+
+      data[savedDate][savedTime] = value
+      data[savedDate]['total'] += value
+
+      const li = document.createElement('li')
+      li.className = 'record-item'
+
+      // Record Item
+      const item_date = document.createElement('p')
+      item_date.textContent = savedTime
+      item_date.className = 'record-item-date'
+
+      const item_value = document.createElement('p')
+      item_value.textContent = ms2time(value)
+      item_value.className = 'record-item-value'
+
+      li.appendChild(item_date)
+      li.appendChild(item_value)
+
+      ol.appendChild(li)
+
+      // Check out it's the last item of,
+      // If it's the last then append it to ol 
+      const next_key = Object.keys(record)[index + 1]
+
+      if (next_key) {
+        const next_date = new Date(parseInt(next_key)).toDateString()
+
+        // If the next day is another day
+        if (savedDate != next_date) {
+          const totalElem = document.createElement('p')
+          totalElem.classList = 'time record-total'
+          totalElem.textContent = ms2time(data[savedDate]['total'])
+
+          const day = document.createElement('h4')
+          day.textContent = savedDate
+
+          ol.prepend(totalElem)
+          ol.prepend(day)
+        }
+      } else {
+        const totalElem = document.createElement('p')
+        totalElem.classList = 'time record-total'
+        totalElem.textContent = ms2time(data[savedDate]['total'])
+
+        const day = document.createElement('h4')
+        day.textContent = 'Today'
+
+        ol.prepend(totalElem)
+        ol.prepend(day)
+      }
+
+      recordHistoryRef.prepend(ol)
+    })
   }
 }
 
@@ -334,7 +318,7 @@ Object.prototype.isEmpty = function() {
 }
 
 // - Time utils (Converting)
-function getTime(ms) {
+function ms2time(ms) {
   let s = m = h = 0
   s = ms / 1000
 
@@ -347,45 +331,24 @@ function getTime(ms) {
       m = m % 60
     }
   }
-  return [s, m, h].map(e => Math.floor(e).padNum())
-}
-
-
-
-// Document element create function
-function createElem(tagName, parentElemId, content) {
-  let elem = document.createElement(tagName)
-  let parent = document.querySelector(parentElemId)
-
-  // Content work
-  elem.textContent = content
-
-  // Document Fragment
-  let frag = new DocumentFragment()
-  frag.appendChild(elem)
-
-  // Append it to parent 
-  parent.appendChild(frag)
+  const time = [s, m, h].map(e => Math.floor(e).padNum())
+  return `${time[2]}:${time[1]}:${time[0]}`
 }
 
 
 // # Initializing
-
 const currentTimer = new CountTime
-const record = new Record 
+const record = new Record
 
 function init() {
-  
-  
   chrome.storage.sync.get('startTime', (result) => {
     if (!result.isEmpty()) {
       currentTimer.start = result.startTime
       currentTimer.startTimer()
-      
     }
   })
 
-  record.timeHistory()
+  record.load()
 }
 
 init()
