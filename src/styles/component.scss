@@ -1,45 +1,43 @@
 @import '__variables_color.scss';
 @import '__variables_size.scss';
-
 // Button event colors 
 // 1. Focus - Green, 2. Active - , 3. Hover - Green
 $btn-c-focus: $c-main-a1-comp;
 // $btn-c-active:
 $btn-c-hover: $c-main-a2-comp;
-
-
 // Components
 .board {
-  border-radius: .5rem;
-  border-top: .1rem solid rgba($gray-light, .1);
-  border-bottom: .1rem solid rgba($gray-light, .1);
-  padding: $co-H/2 $co-W/2;
-  background: $white;
-  // display: grid;
+    border-radius: .5rem;
+    border-top: .1rem solid rgba($gray-light, .1);
+    border-bottom: .1rem solid rgba($gray-light, .1);
+    padding: $co-H/2 $co-W/2;
+    background: $white;
+    // display: grid;
 }
 
 .btn {
-  border-radius: .5em;
-  padding: $co-H $co-W ;
-  margin: $co-H/2 $co-W/2;
-  background-color: $white-light;
-  border-style: none;
-  box-shadow: 0 0 .5em .1em $gray-light;
-  cursor: pointer;
-  color: $black-dark;
-  font-weight: bold;
-
-  &:focus {
-    background-color: rgba($btn-c-focus, .85);
-    color: $white-light;
-    outline: none;
-    box-shadow: 0 0 .5em .1em $gray-light inset;
-  }
-  &:active {
-    transform: scale(.9);
-  }
-  &:hover {
-    background-color: rgba($btn-c-hover, .85);
-    color: $white-light;
-  }
+    font-family: 'Courier Prime', monospace;
+    border-radius: .5em;
+    padding: $co-H $co-W;
+    margin: $co-H/2 $co-W/2;
+    background-color: $white-light;
+    border-style: none;
+    box-shadow: 0 0 .5em .1em $gray-light;
+    cursor: pointer;
+    color: $black-dark;
+    font-weight: bold;
+    font-size: inherit;
+    &:focus {
+        background-color: rgba($btn-c-focus, .85);
+        color: $white-light;
+        outline: none;
+        box-shadow: 0 0 .5em .1em $gray-light inset;
+    }
+    &:active {
+        transform: scale(.9);
+    }
+    &:hover {
+        background-color: rgba($btn-c-hover, .85);
+        color: $white-light;
+    }
 }

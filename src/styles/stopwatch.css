@@ -1,8 +1,15 @@
-/* #ms {
-  margin-left: .8rem;
-  font-size: 4.8rem;
-  width: $ms-width * 1.5;
-}; */
+/* $H: 
+$S:
+$L: 
+ */
+/* // bg sub color
+$c-bg-sub: ;
+
+// bg extra
+$c-bg-ext: ;
+
+// font-color
+$c-font: ;  */
 #ball {
   width: 2.62rem;
   height: 2.62rem;

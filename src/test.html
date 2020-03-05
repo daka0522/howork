@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" id="svg-table">
+      <!-- <g fill="white" stroke="green" stroke-widthh="5">
+        <circle cx="40" cy="40" r="25"></circle>
+        <circle cx="60" cy="60" r="25"></circle>
+      </g> -->
+
+      <g trnasform="translate(0, 10)">
+        <rect class="day" width="12" height="12" x="46" y="0" fill="#ebedf0" data-count="0" data-date="2019-02-24"></rect>
+      </g>
+      
+      
+      <rect width="12" height="12" x="10" y="20" fill="#ebedf0"></rect>
+
+
+
+  </svg>
+
+
+    <script>
+        const table_width = 100
+        const table_height = 35
+
+        const table_width_cell = 10
+        const table_height_cell = 7
+
+        const cell_width = 12
+        const cell_height = 12
+
+        const svgTable = document.getElementById('svg-table')
+        const frag = new DocumentFragment
+
+        // document.createElement('g')
+
+        const svg = document.createElement('svg')
+
+        for (let i = 0; i < 7; i++) {
+
+            // let g = document.createElement('g')
+
+            // svg.appendChild(g)
+            const rect = document.createElement('rect')
+
+            rect.setAttribute('width', cell_width)
+            rect.setAttribute('height', cell_height)
+
+            rect.setAttribute('x', i * 10)
+            rect.setAttribute('y', 10)
+
+            rect.setAttribute('fill', '#ebedf0')
+
+            frag.appendChild(rect)
+        }
+        svgTable.appendChild(frag)
+            // document.body.appendChild(svg)
+    </script>
+</body>
+
+</html>

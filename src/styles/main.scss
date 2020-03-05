@@ -1,137 +1,131 @@
 @import '__variables_color.scss';
 @import '__variables_size.scss';
-
 // Font setting
 body {
-  font-family: 'Kalam', cursive;
-  // font-family: 'Quintessential', cursive;
-  // font-family: 'Philosopher', sans-serif;
+    font-family: 'Kalam', cursive;
 }
+
 // Monospace for time format 
-.time, .record-item {
-  // font-family: 'Cousine', monospace;
-  // font-family: 'B612 Mono', monospace;
-  font-family: 'Courier Prime', monospace;
-  // font-family: 'Cutive Mono', monospace;
+.time,
+.record-item {
+    font-family: 'Courier Prime', monospace;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-
-  
-  font-size: 1rem;
-  line-height: 1.6rem;
-
-  & * {
-    font-family: inherit;
-  }
+    margin: 0;
+    padding: 0;
+    line-height: 1.6rem;
+    & * {
+        font-family: inherit;
+    }
 }
 
-
-
 #app {
-  display: grid;
-  grid-gap: .8rem;
-  width: 20em;
-  background-color: $c-bg;
-  text-align: center;
-
-  p {
-    margin: $co-H 0;
-  }
-
-  h4 {
-    color: $c-font-sub;
-    font-weight: unset;
-    margin: $co-H 0;
-  }
-
-  address {
-    border-radius: .5rem;
+    display: grid;
+    grid-gap: .8rem;
+    width: 20em;
     background-color: $c-bg;
-    color: $c-font-extra;
-
-    & * {
-      display: block;
+    text-align: center;
+    p {
+        margin: $co-H 0;
     }
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  :link {
-    color: inherit;
-  }
-
-  :visited {
-    color: inherit;
-  }
+    h4 {
+        color: $c-font-sub;
+        font-weight: unset;
+        margin: $co-H 0;
+    }
+    address {
+        font-family: initial;
+        ;
+        border-radius: .5rem;
+        background-color: $c-bg;
+        color: $c-font-extra;
+        font-size: small;
+        & * {
+            display: block;
+        }
+    }
+    a {
+        text-decoration: none;
+    }
+     :link {
+        color: inherit;
+    }
+     :visited {
+        color: inherit;
+    }
 }
 
 #record {
-  display: flex;
-  flex-direction: column;
-  ;
-  ol { 
-    padding: 0;
-  }
-  p {
-    margin: $co-H/2 0;
-  }
-
-  .record-item {
-    
-    // background-color: red;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    &-date {
-      color: rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column;
+    ;
+    ol {
+        padding: 0;
     }
+    p {
+        margin: $co-H/2 0;
+    }
+    .record-item {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+        place-content: center;
+        justify-content: center;;
+        align-items: center;;
+        justify-items: center;;
+        &-date {
+            color: rgba(0, 0, 0, .5);
+        }
+        &-remove {
+            cursor: pointer;
+            color: white;
+            // background-color: red;;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            text-align: center;
+            padding: 0;
+            border-style: none;
+            vertical-align: middle;
+        }
 
-  }
-  .record-total {
-    font-size: 1.6rem;
-    // margin: 1.6em 0;
-  }
+    }
+    &-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        #givenDay {
+            border-style: none;
+            text-align: center;
+            border-radius: .5em;
+            background-color: $gray-light;
+        }
+    }
+    .total-sum {
+        font-size: medium;
+    }
 }
 
 // Start and Stop time display 
 .time-cont {
-  display: flex;
-  justify-content: space-between;;
+    display: flex;
+    justify-content: space-between;
+    ;
 }
-
-
-
-
-
-
 
 // Theme try
-
 #app {
-  #app[theme=default] {
-    // background-color: red;
-
-
-    // background-color: rgba($gray-light, .05);
-  }
-
-  #app[theme=dark] {
-    $c-bg: $black-dark;
-
-
-    // background-color: $black-dark;
-    color: $white-light;
-
-    .board {
-      // background-color: rgba($black-dark, .85);
+    #app[theme=default] {
+        // background-color: red;
+        // background-color: rgba($gray-light, .05);
     }
-  }
-
+    #app[theme=dark] {
+        $c-bg: $black-dark;
+        // background-color: $black-dark;
+        color: $white-light;
+        .board {
+            // background-color: rgba($black-dark, .85);
+        }
+    }
 }
-

@@ -14,14 +14,14 @@ body {
   font-family: 'Kalam', cursive;
 }
 
-.time, .record-item {
+.time,
+.record-item {
   font-family: 'Courier Prime', monospace;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-size: 1rem;
   line-height: 1.6rem;
 }
 
@@ -48,9 +48,11 @@ body * {
 }
 
 #app address {
+  font-family: initial;
   border-radius: .5rem;
   background-color: rgba(128, 128, 128, 0.05);
   color: rgba(0, 0, 0, 0.5);
+  font-size: small;
 }
 
 #app address * {
@@ -84,15 +86,44 @@ body * {
 
 #record .record-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+  place-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
 
 #record .record-item-date {
   color: rgba(0, 0, 0, 0.5);
 }
 
-#record .record-total {
-  font-size: 1.6rem;
+#record .record-item-remove {
+  cursor: pointer;
+  color: white;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  text-align: center;
+  padding: 0;
+  border-style: none;
+  vertical-align: middle;
+}
+
+#record-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#record-total #givenDay {
+  border-style: none;
+  text-align: center;
+  border-radius: .5em;
+  background-color: rgba(128, 128, 128, 0.25);
+}
+
+#record .total-sum {
+  font-size: medium;
 }
 
 .time-cont {

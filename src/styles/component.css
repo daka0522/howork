@@ -1,3 +1,15 @@
+/* $H: 
+$S:
+$L: 
+ */
+/* // bg sub color
+$c-bg-sub: ;
+
+// bg extra
+$c-bg-ext: ;
+
+// font-color
+$c-font: ;  */
 .board {
   border-radius: .5rem;
   border-top: 0.1rem solid rgba(128, 128, 128, 0.1);
@@ -7,6 +19,7 @@
 }
 
 .btn {
+  font-family: 'Courier Prime', monospace;
   border-radius: .5em;
   padding: 0.625rem 1.6rem;
   margin: 0.3125rem 0.8rem;
@@ -16,6 +29,7 @@
   cursor: pointer;
   color: rgba(0, 0, 0, 0.75);
   font-weight: bold;
+  font-size: inherit;
 }
 
 .btn:focus {
