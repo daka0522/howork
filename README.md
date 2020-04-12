@@ -1,6 +1,6 @@
 # howork
-Purpose: Check & log the time you really work
-Process: 
+- Purpose: Check & log the time you really work
+- Process: 
   1. Start the stop watch
   2. Stop it
   3. Save it
